@@ -8,9 +8,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody rb;
     public Animator animator;
-    public Text countText;
-    public Text winText;
-    private int count;
 
     Vector3 movement;
 
@@ -33,22 +30,4 @@ public class PlayerMovement : MonoBehaviour
         //rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     //}
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Pick Up"))
-        {
-            other.gameObject.SetActive(false);
-            count = count + 1;
-            SetCountText();
-        }
-    }
-
-    void SetCountText()
-    {
-        countText.text = "Keys collected: " + count.ToString();
-        if (count >= 3)
-        {
-            winText.text = "Door Opened!";
-        }
-    }
 }
