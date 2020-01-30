@@ -7,43 +7,106 @@ using UnityEngine.SceneManagement;
 public class PickUp : MonoBehaviour
 {
 
-    public Text countText;
-    public Text win;
-    public Text endGame;
-    public int count;
+    private int _count;
     bool gameHasEnded = false;
+
+    public GameObject points0;
+    public GameObject points1;
+    public GameObject points2;
+    public GameObject points3;
+
+    public GameObject openDoor;
+    public GameObject win;
+    public GameObject lose;
 
 
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            LosingTheGame();
+        }
         if (other.gameObject.CompareTag("Pick Up"))
         {
             other.gameObject.SetActive(false);
-            count = count + 1;
+            _count = _count + 1;
             SetCountText();
         }
-        if (other.gameObject.CompareTag("Door") && count >= 3)
+        if (other.gameObject.CompareTag("Door") && _count >= 3)
         {
-            EndTheGame();
+            WinningTheGame();
         }
     }
 
     void SetCountText()
     {
-        countText.text = "Keys collected: " + count.ToString();
-        if (count >= 3)
+
+        switch (_count)
         {
-            win.text = "Door Opened!";
+            case 0:
+
+                points0.SetActive(true);
+                points1.SetActive(false);
+                points2.SetActive(false);
+                points3.SetActive(false);
+
+                break;
+            case 1:
+
+                points0.SetActive(false);
+                points1.SetActive(true);
+                points2.SetActive(false);
+                points3.SetActive(false);
+
+                break;
+            case 2:
+
+                points0.SetActive(false);
+                points1.SetActive(false);
+                points2.SetActive(true);
+                points3.SetActive(false);
+
+                break;
+            case 3:
+
+                points0.SetActive(false);
+                points1.SetActive(false);
+                points2.SetActive(false);
+                points3.SetActive(true);
+
+                break;
+            default:
+                points0.SetActive(true);
+                points1.SetActive(false);
+                points2.SetActive(false);
+                points3.SetActive(false);
+
+                break;
+        }
+
+
+        if (_count >= 3)
+        {
+            openDoor.SetActive(true);
+           // win.text = "Door Opened!";
         }
     }
-    void EndTheGame()
+    void WinningTheGame()
     {
         if (gameHasEnded == false)
         {
-            endGame.text = "You WON";
+           // endGame.text = "You WON";
             gameHasEnded = true;
             Invoke("Restart", 2f);
         }
+
+    }
+
+    void LosingTheGame()
+    {
+        // YOU LOST
+        lose.SetActive(true);
+        Invoke("Restart", 2f);
 
     }
 
