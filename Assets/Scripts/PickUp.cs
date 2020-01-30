@@ -95,7 +95,7 @@ public class PickUp : MonoBehaviour
     {
         if (gameHasEnded == false)
         {
-           // endGame.text = "You WON";
+            win.SetActive(true);
             gameHasEnded = true;
             Invoke("Restart", 2f);
         }
@@ -104,10 +104,13 @@ public class PickUp : MonoBehaviour
 
     void LosingTheGame()
     {
-        // YOU LOST
-        lose.SetActive(true);
-        Invoke("Restart", 2f);
-
+        if (gameHasEnded != true)
+        {
+            // YOU LOST
+            openDoor.SetActive(false);
+            lose.SetActive(true);
+            Invoke("Restart", 2f);
+        }
     }
 
     void Restart()
