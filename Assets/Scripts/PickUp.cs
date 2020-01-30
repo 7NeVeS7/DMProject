@@ -95,6 +95,7 @@ public class PickUp : MonoBehaviour
     {
         if (gameHasEnded == false)
         {
+            openDoor.SetActive(false);
             win.SetActive(true);
             gameHasEnded = true;
             Invoke("Restart", 2f);
