@@ -5,27 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-
-
-    public GameObject Begin;
-    public GameObject Instruction;
-
+    public GameObject begin;
+    public GameObject instruction;
+    private float _waitToStart = 4f;
+    private int _startGame = 1;
+    
     public void LoadScene()
     {
 
         StartCoroutine("Instruct");
 
-
     }
-
 
     IEnumerator Instruct()
     {
-
-        Begin.SetActive(false);
-        Instruction.SetActive(true);
-           yield return new WaitForSeconds(4);
-        SceneManager.LoadScene(1);
-
+        begin.SetActive(false);
+        instruction.SetActive(true);
+           yield return new WaitForSeconds(_waitToStart);
+        SceneManager.LoadScene(_startGame);
     }
 }

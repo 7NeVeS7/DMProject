@@ -5,11 +5,7 @@ using UnityEngine.AI;
 
 public class FollowThePath : MonoBehaviour
 {
-
-
-    
     // Stan I - patrol
-
     [SerializeField]
     private GameObject[] _waypoints;
 
@@ -18,10 +14,7 @@ public class FollowThePath : MonoBehaviour
 
     public NavMeshAgent agent;
 
-
-
     // Stan II - podążanie
-
     public Transform thePlayer;
     private bool _death = false;
 
@@ -38,16 +31,10 @@ public class FollowThePath : MonoBehaviour
     [HideInInspector]
     public List<Transform> visibleKillingTargets = new List<Transform>();
 
-
-
-
-
     private void Start()
     {
         StartCoroutine("FindTargetsWithDelay", 0.2f);
     }
-
-
 
     private void Update()
     {
@@ -66,12 +53,7 @@ public class FollowThePath : MonoBehaviour
 
     }
 
-
-
-
-
 // Wykrywanie gracza
-
     IEnumerator FindTargetsWithDelay(float delay)
     {
         while (true)
@@ -88,7 +70,6 @@ public class FollowThePath : MonoBehaviour
         Collider[] targetsInViewKillingRadius = Physics.OverlapSphere(transform.position, viewKillingRadius, targetMask);
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
 
-
         for (int j = 0; j < targetsInViewKillingRadius.Length; j++)
         {
             Transform target = targetsInViewKillingRadius[j].transform;
@@ -102,8 +83,6 @@ public class FollowThePath : MonoBehaviour
                 }
             }
         }
-
-
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             Transform target = targetsInViewRadius[i].transform;
@@ -117,7 +96,6 @@ public class FollowThePath : MonoBehaviour
                 }
             }
         }
-
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
@@ -129,10 +107,7 @@ public class FollowThePath : MonoBehaviour
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 
-
-
     // Patrolowanie
-
     private void FollowPath()
     {
         if (_waypoints.Length != 0)
@@ -164,9 +139,6 @@ public class FollowThePath : MonoBehaviour
             return;
         }
     }
-
-
-
 
 // Podążanie lub uśmiercenie gracza
     private void FollowPlayer()

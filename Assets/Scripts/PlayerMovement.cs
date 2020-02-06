@@ -4,23 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-
-    public Rigidbody rb;
-    public Animator animator;
-
-    Vector3 movement;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Rigidbody _rigbod;
+    [SerializeField] private Animator _animator;
+    private Vector3 _movement;
 
     void Update()
     {
         // Input
-        movement.x = Input.GetAxis("Horizontal");
-        movement.z = Input.GetAxis("Vertical");
+        _movement.x = Input.GetAxis("Horizontal");
+        _movement.z = Input.GetAxis("Vertical");
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.z);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-        rb.velocity = Vector3.zero;
+        _animator.SetFloat("Horizontal", _movement.x);
+        _animator.SetFloat("Vertical", _movement.z);
+        _animator.SetFloat("Speed", _movement.sqrMagnitude);
+        _rigbod.velocity = Vector3.zero;
         //rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
     }
 
@@ -28,8 +26,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
    {
         //Movement
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.deltaTime);
-        
+        _rigbod.MovePosition(_rigbod.position + _movement * moveSpeed * Time.deltaTime);
     }
 
 
